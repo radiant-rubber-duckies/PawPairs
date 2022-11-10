@@ -9,3 +9,51 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id       Int    @id @default(autoincrement())
+  username  String  @unique
+  password  String
+  location  Int
+  careStatus  Care
+  bio   String
+  pets  Pet[]
+  careInstances CareInstance[]
+}
+
+enum Care {
+  OFFERING
+  SEEKING
+}
+
+model Pet {
+  id       Int    @id @default(autoincrement())
+  owner User @relation(fields: [ownerId], references: [id])
+  ownerId Int
+  type  PetType
+  size  PetSize
+  medicalInfo   String
+  careInstance  CareInstance[]
+}
+
+enum PetType {
+  DOG
+  CAT
+}
+
+enum PetSize {
+  SMALL
+  MEDIUM
+  LARGE
+}
+
+model CareInstance {
+  careTaker User  @relation(fields: [userId], references: [id])
+  userId  Int
+  pet Pet  @relation(fields: [petId], references: [id])
+  petId Int
+  startDate DateTime
+  endDate DateTime
+  @@id([userId, petId])
+}
+
