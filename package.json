@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "seed": "node script/seed.js",
   },
   "repository": {
     "type": "git",
@@ -18,6 +20,7 @@
   },
   "homepage": "https://github.com/wwc-hit-hackathon/Team-Radiant-Rubber-Duckies#readme",
   "dependencies": {
+    "@prisma/client": "^4.6.1",
     "express": "^4.18.2"
   },
   "devDependencies": {
