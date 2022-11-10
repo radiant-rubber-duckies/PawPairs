@@ -11,13 +11,13 @@ datasource db {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  username  String  @unique
-  password  String
-  location  Int
-  careStatus  Care
-  bio   String
-  pets  Pet[]
+  id            Int            @id @default(autoincrement())
+  username      String         @unique
+  password      String
+  location      Int
+  careStatus    Care
+  bio           String
+  pets          Pet[]
   careInstances CareInstance[]
 }
 
@@ -27,13 +27,14 @@ enum Care {
 }
 
 model Pet {
-  id       Int    @id @default(autoincrement())
-  owner User @relation(fields: [ownerId], references: [id])
-  ownerId Int
-  type  PetType
-  size  PetSize
-  medicalInfo   String
-  careInstance  CareInstance[]
+  id           Int            @id @default(autoincrement())
+  owner        User           @relation(fields: [ownerId], references: [id])
+  ownerId      Int
+  type         PetType
+  size         PetSize
+  bio          String
+  medicalInfo  String
+  careInstance CareInstance[]
 }
 
 enum PetType {
@@ -48,12 +49,12 @@ enum PetSize {
 }
 
 model CareInstance {
-  careTaker User  @relation(fields: [userId], references: [id])
-  userId  Int
-  pet Pet  @relation(fields: [petId], references: [id])
-  petId Int
+  careTaker User     @relation(fields: [userId], references: [id])
+  userId    Int
+  pet       Pet      @relation(fields: [petId], references: [id])
+  petId     Int
   startDate DateTime
-  endDate DateTime
+  endDate   DateTime
+
   @@id([userId, petId])
 }
-
