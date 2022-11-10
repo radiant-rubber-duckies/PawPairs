@@ -19,5 +19,8 @@
   "homepage": "https://github.com/wwc-hit-hackathon/Team-Radiant-Rubber-Duckies#readme",
   "dependencies": {
     "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "prisma": "^4.6.1"
   }
 }
