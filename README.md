@@ -2,7 +2,7 @@
 
 **How to run PawPairs locally:**
 * Clone our repo into a new directory. 
-* Create postgres database `creature-coders`
+* Create postgres database `pawpairs`
 * run `npm install`
 * run `npm run seed`
 * run `npm start`
