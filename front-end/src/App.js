@@ -5,6 +5,7 @@ import './App.css';
 import Home from './Components/Home';
 import Nav from './Components/Nav';
 import Search from './Components/Search';
+import Profile from './Components/Profile';
 
 class App extends Component {
   state = {
@@ -34,6 +35,7 @@ class App extends Component {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/search" element={<Search />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </div>
     );
