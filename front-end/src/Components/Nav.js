@@ -27,7 +27,7 @@ const Nav = () => {
         </StyledRightHeader>
       </StyledNavHeader>
       <StyledNavHeaderBottom>
-        <StyledLink to="/home">Home</StyledLink>
+        <StyledLink to="/">Home</StyledLink>
         <StyledLink to="/profile">Profile</StyledLink>
         <StyledLink to="/search">Find Care</StyledLink>
       </StyledNavHeaderBottom>
