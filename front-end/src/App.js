@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
+import { Route, Routes } from 'react-router-dom';
+
 import './App.css';
 import Home from './Components/Home';
+import Nav from './Components/Nav';
+import Search from './Components/Search';
 
 class App extends Component {
   state = {
@@ -26,7 +30,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Home />
+        <Nav />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/search" element={<Search />} />
+        </Routes>
       </div>
     );
   }
