@@ -21,7 +21,11 @@
   "homepage": "https://github.com/wwc-hit-hackathon/Team-Radiant-Rubber-Duckies#readme",
   "dependencies": {
     "@prisma/client": "^4.6.1",
-    "express": "^4.18.2"
+    "cookie-parser": "^1.4.6",
+    "express": "^4.18.2",
+    "http-errors": "^2.0.0",
+    "jade": "^1.11.0",
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
     "prisma": "^4.6.1"
