@@ -4,6 +4,7 @@
 * Clone our repo into a new directory. 
 * Create postgres database `pawpairs`
 * run `npm install`
+* run `npx prisma migrate dev`
 * run `npm run seed`
 * run `npm start`
 * cd into 'front-end' and `npm install`
