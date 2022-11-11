@@ -3,19 +3,21 @@ import { Main } from './style';
 import axios from 'axios';
 
 const Search = () => {
-// const [zips, setZips] = useState([])
+const [zips, setZips] = useState([])
 
 useEffect(() => {
-    return zipGetter
+    zipGetter().then(response => {
+        setZips(response)
+    })
 }, [])
 
 const zipGetter = async () => {
     try {
-      const { data } = await axios.get(`localhost/5001`)
+      const { data } = await axios.get(`http://localhost:5001/`)
       console.log(data)
       return data;
     } catch (err) {
-      console.error('zips error!!!');
+      console.error(err);
     }
   };
 
@@ -25,7 +27,7 @@ const zipGetter = async () => {
         <input placeholder={'zipcode'}></input>
         <button onClick={() => {}}>Search</button>
       </form>
-        {/* {zips.map((zip, i) => {return <p key={i}>{zip.location}</p>})} */}
+        {zips.map((zip, i) => {return <p key={i}>{zip.location}</p>})}
     </Main>
   );
 };
