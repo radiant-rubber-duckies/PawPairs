@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import Home from './Components/Home';
 
 class App extends Component {
   state = {
@@ -25,10 +26,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>PAWPAIRS</h1>
-        <h4>
-          A place to find or offer short-term pet care, neighbor to neighbor
-        </h4>
+        <Home />
       </div>
     );
   }
