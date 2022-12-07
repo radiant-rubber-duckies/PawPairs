@@ -14,8 +14,8 @@ model User {
   id            Int            @id @default(autoincrement())
   createdDate   DateTime       @default(now())
   username      String         @unique
-  userFirstName String
-  userLastName  String?
+  first         String
+  last          String?
   password      String
   location      Int
   careStatus    Care
