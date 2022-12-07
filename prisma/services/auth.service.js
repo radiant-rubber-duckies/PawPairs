@@ -1,4 +1,4 @@
-const { PrismaClient } = require('@prisma/client');
+const { PrismaClient, User } = require('@prisma/client');
 const prisma = new PrismaClient();
 const createError = require('http-errors');
 
@@ -9,9 +9,8 @@ const jwt = require('../utils/jwt');
 
 class AuthService {
   static async register(data) {
-    const { email } = data;
     data.password = bcrypt.hashSync(data.password, 8);
-    let user = prisma.user.create({
+    let user = await prisma.user.create({
       data,
     });
     data.accessToken = await jwt.signAccessToken(user);
@@ -21,7 +20,6 @@ class AuthService {
 
   static async login(data) {
     const { username, password } = data;
-    console.log('🤒DATA', data);
     const user = await prisma.user.findUnique({
       where: {
         username,
@@ -30,10 +28,10 @@ class AuthService {
     if (!user) {
       throw createError.NotFound('User not registered');
     }
-    console.log('👁USER', user);
+    console.log('👁USER', user); //TODO: if using "pippin", fetches correct user
     const checkPassword = bcrypt.compareSync(password, user.password);
-    console.log('👀CHECK PASSWORD', checkPassword);
-    console.log('👅USER PASSWORD', typeof user.password);
+    console.log('👅USER PASSWORD', user.password); //TODO: correct password & data type
+    console.log('👀CHECK PASSWORD', checkPassword); //TODO: returns false (might need to hash passwords in seed file bc works if creating user by registering)
     if (!checkPassword)
       throw createError.Unauthorized('Username or password not valid');
     delete user.password;
@@ -49,6 +47,7 @@ class AuthService {
 
 module.exports = AuthService;
 
+//postman returns when testing auth endpoint (tho user not there when testing login or all after)
 // {
 //   "status": true,
 //   "message": "User created successfully",
