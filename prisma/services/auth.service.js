@@ -20,18 +20,22 @@ class AuthService {
   }
 
   static async login(data) {
-    const { email, password } = data;
+    const { username, password } = data;
+    console.log('🤒DATA', data);
     const user = await prisma.user.findUnique({
       where: {
-        email,
+        username,
       },
     });
     if (!user) {
       throw createError.NotFound('User not registered');
     }
+    console.log('👁USER', user);
     const checkPassword = bcrypt.compareSync(password, user.password);
+    console.log('👀CHECK PASSWORD', checkPassword);
+    console.log('👅USER PASSWORD', typeof user.password);
     if (!checkPassword)
-      throw createError.Unauthorized('Email address or password not valid');
+      throw createError.Unauthorized('Username or password not valid');
     delete user.password;
     const accessToken = await jwt.signAccessToken(user);
     return { ...user, accessToken };
@@ -44,3 +48,13 @@ class AuthService {
 }
 
 module.exports = AuthService;
+
+// {
+//   "status": true,
+//   "message": "User created successfully",
+//   "data": {
+//       "username": "sommer",
+//       "password": "$2a$08$ErQ2xFOJgZtOAzIUneibguCHIqwFo6q5x7WGi1CfvnpYzkLNdf2kO",
+//       "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7fSwiaWF0IjoxNjcwMzczNTA5fQ.vMU74DKS4-luSN2-GW9WHUXPK_mUQRuDDnLsdsDWvL0"
+//   }
+// }
