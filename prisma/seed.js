@@ -4,56 +4,57 @@ const bcrypt = require('bcryptjs');
 
 async function main() {
   //USER SEED
+  const hashedSally = bcrypt.hashSync('ragdoll', 8);
   const sally = await prisma.User.upsert({
     where: { username: 'sallyskellington' },
     update: {},
     create: {
       id: 1,
       username: 'sallyskellington',
-      password: 'ragdoll',
+      password: hashedSally,
       firstName: 'Sally',
       location: 11103,
       careStatus: Care.OFFERING,
       bio: 'Loves animals and cooking new recipes',
     },
   });
-  sally.password = bcrypt.hashSync(sally.password, 8);
 
+  const hashedPippin = bcrypt.hashSync('pippin', 8);
   const pippin = await prisma.User.upsert({
     where: { username: 'pippin' },
     update: {},
     create: {
       id: 2,
       username: 'pippin',
-      password: 'pippin',
+      password: hashedPippin,
       location: 11215,
       careStatus: Care.OFFERING,
       bio: "I'm an avid hiker and I love to spend time at the ocean",
     },
   });
-  pippin.password = bcrypt.hashSync(pippin.password, 8);
 
+  const hashedDavid = bcrypt.hashSync('davidbowie', 8);
   const david = await prisma.User.upsert({
     where: { username: 'davidbowie' },
     update: {},
     create: {
       id: 3,
       username: 'davidbowie',
-      password: 'davidbowie',
+      password: hashedDavid,
       location: 11238,
       careStatus: Care.OFFERING,
       bio: 'I enjoy singing and dancing for friends, and dressing like an absolute boss',
     },
   });
-  david.password = bcrypt.hashSync(david.password, 8);
 
+  const hashedMoira = bcrypt.hashSync('moirarose', 8);
   const moira = await prisma.User.upsert({
     where: { username: 'moirarose' },
     update: {},
     create: {
       id: 4,
       username: 'moirarose',
-      password: 'moirarose',
+      password: hashedMoira,
       firstName: 'Moira',
       lastName: 'Rose',
       location: 10016,
@@ -61,7 +62,6 @@ async function main() {
       bio: 'I have a large wig collection that you can take in with the dog as long as you promise to not touch any of them',
     },
   });
-  moira.password = bcrypt.hashSync(moira.password, 8);
 
   //PET SEED
   const bebe = await prisma.Pet.upsert({
