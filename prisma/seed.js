@@ -4,8 +4,10 @@ const bcrypt = require('bcryptjs');
 
 async function main() {
   //USER SEED
-  const sally = await prisma.User.create({
-    data: {
+  const sally = await prisma.User.upsert({
+    where: { username: 'sallyskellington' },
+    update: {},
+    create: {
       id: 1,
       username: 'sallyskellington',
       password: 'ragdoll',
@@ -17,8 +19,10 @@ async function main() {
   });
   sally.password = bcrypt.hashSync(sally.password, 8);
 
-  const pippin = await prisma.User.create({
-    data: {
+  const pippin = await prisma.User.upsert({
+    where: { username: 'pippin' },
+    update: {},
+    create: {
       id: 2,
       username: 'pippin',
       password: 'pippin',
@@ -29,8 +33,10 @@ async function main() {
   });
   pippin.password = bcrypt.hashSync(pippin.password, 8);
 
-  const david = await prisma.User.create({
-    data: {
+  const david = await prisma.User.upsert({
+    where: { username: 'davidbowie' },
+    update: {},
+    create: {
       id: 3,
       username: 'davidbowie',
       password: 'davidbowie',
@@ -41,8 +47,10 @@ async function main() {
   });
   david.password = bcrypt.hashSync(david.password, 8);
 
-  const moira = await prisma.User.create({
-    data: {
+  const moira = await prisma.User.upsert({
+    where: { username: 'moirarose' },
+    update: {},
+    create: {
       id: 4,
       username: 'moirarose',
       password: 'moirarose',
@@ -56,8 +64,11 @@ async function main() {
   moira.password = bcrypt.hashSync(moira.password, 8);
 
   //PET SEED
-  const bebe = await prisma.Pet.create({
-    data: {
+  const bebe = await prisma.Pet.upsert({
+    where: { id: 1 },
+    update: {},
+    create: {
+      id: 1,
       ownerId: moira.id,
       type: PetType.DOG,
       size: PetSize.SMALL,
