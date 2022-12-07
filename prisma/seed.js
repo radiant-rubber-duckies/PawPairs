@@ -1,5 +1,6 @@
 const { PrismaClient, Care, PetSize, PetType } = require('@prisma/client');
 const prisma = new PrismaClient();
+const bcrypt = require('bcryptjs');
 
 async function main() {
   //USER SEED
@@ -13,6 +14,7 @@ async function main() {
       bio: 'Loves animals and cooking new recipes',
     },
   });
+  sally.password = bcrypt.hashSync(sally.password, 8);
 
   const pippin = await prisma.User.create({
     data: {
@@ -24,6 +26,7 @@ async function main() {
       bio: "I'm an avid hiker and I love to spend time at the ocean",
     },
   });
+  pippin.password = bcrypt.hashSync(pippin.password, 8);
 
   const david = await prisma.User.create({
     data: {
@@ -35,6 +38,7 @@ async function main() {
       bio: 'I enjoy singing and dancing for friends, and dressing like an absolute boss',
     },
   });
+  david.password = bcrypt.hashSync(david.password, 8);
 
   const moira = await prisma.User.create({
     data: {
@@ -46,6 +50,7 @@ async function main() {
       bio: 'I have a large wig collection that you can take in with the dog as long as you promise to not touch any of them',
     },
   });
+  moira.password = bcrypt.hashSync(moira.password, 8);
 
   //PET SEED
   const bebe = await prisma.Pet.create({
@@ -74,6 +79,6 @@ main()
     process.exit(1);
   })
   .finally(async () => {
-    console.log("✨🐤 Database has been seeded! 🦆✨")
+    console.log('✨🐤 Database has been seeded! 🦆✨');
     await prisma.$disconnect();
   });
