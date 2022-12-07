@@ -5,6 +5,7 @@ class AuthController {
   static async register(req, res, next) {
     try {
       const user = await auth.register(req.body);
+
       res.status(200).json({
         status: true,
         message: 'User created successfully',
@@ -18,6 +19,7 @@ class AuthController {
   static async login(req, res, next) {
     try {
       const data = await auth.login(req.body);
+
       res.status(200).json({
         status: true,
         message: 'Account login successful',
@@ -31,6 +33,7 @@ class AuthController {
   static async all(req, res, next) {
     try {
       const users = await auth.all();
+
       res.status(200).json({
         status: true,
         message: 'All users',

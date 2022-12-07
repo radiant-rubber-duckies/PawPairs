@@ -15,6 +15,7 @@ class AuthService {
     });
     data.accessToken = await jwt.signAccessToken(user);
     //TODO: in order to work, data must include location, bio, and care type. Do we want to continue requiring this?
+
     return data;
   }
 
@@ -36,12 +37,13 @@ class AuthService {
       throw createError.Unauthorized('Username or password not valid');
     delete user.password;
     const accessToken = await jwt.signAccessToken(user);
+
     return { ...user, accessToken };
   }
 
   static async all() {
     const allUsers = await prisma.user.findMany();
-    //TODO: unclear if this is working
+
     return allUsers;
   }
 }
