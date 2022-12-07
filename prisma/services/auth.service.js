@@ -1,4 +1,4 @@
-const { PrismaClient, User } = require('@prisma/client');
+const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 const createError = require('http-errors');
 
@@ -14,7 +14,7 @@ class AuthService {
       data,
     });
     data.accessToken = await jwt.signAccessToken(user);
-
+    //TODO: in order to work, data must include location, bio, and care type. Do we want to continue requiring this?
     return data;
   }
 
@@ -41,19 +41,9 @@ class AuthService {
 
   static async all() {
     const allUsers = await prisma.user.findMany();
+    //TODO: unclear if this is working
     return allUsers;
   }
 }
 
 module.exports = AuthService;
-
-//postman returns when testing auth endpoint (tho user not there when testing login or all after)
-// {
-//   "status": true,
-//   "message": "User created successfully",
-//   "data": {
-//       "username": "sommer",
-//       "password": "$2a$08$ErQ2xFOJgZtOAzIUneibguCHIqwFo6q5x7WGi1CfvnpYzkLNdf2kO",
-//       "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7fSwiaWF0IjoxNjcwMzczNTA5fQ.vMU74DKS4-luSN2-GW9WHUXPK_mUQRuDDnLsdsDWvL0"
-//   }
-// }
